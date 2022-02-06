@@ -1,0 +1,16 @@
+echo "hola"
+
+cd ~
+
+export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0 # in WSL 2
+export LIBGL_ALWAYS_INDIRECT=1
+export XDG_RUNTIME_DIR="~/xdg_runtime_dir/"
+export RUNLEVEL=3
+
+#ROS2
+source /opt/ros/foxy/setup.bash
+
+export PATH=$PATH:/usr/bin/
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/include/:/usr/lib/
+
+alias nvim='~/.config/nvim/nvim.appimage'
