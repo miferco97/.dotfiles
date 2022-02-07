@@ -11,8 +11,14 @@ Plugin 'nvim-lua/popup.nvim'
 Plugin 'nvim-lua/plenary.nvim'
 Plugin 'nvim-telescope/telescope.nvim'
 Plugin 'nvim-telescope/telescope-fzy-native.nvim'
-Plugin 'sonph/onehalf', { 'rtp': 'vim' }
 Plugin 'cdelledonne/vim-cmake'
+Plugin 'tpope/vim-commentary'
+Plugin 'github/copilot.vim'
+Plugin 'rhysd/vim-clang-format'
+Plugin 'Yggdroot/indentLine'
+
+Plugin 'sonph/onehalf', { 'rtp': 'vim' }
+Plugin 'Mofiqul/vscode.nvim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -34,11 +40,15 @@ filetype plugin indent on    " required
 
 set t_Co=256
 set cursorline
-colorscheme onehalfdark
-let g:airline_theme='onehalfdark'
-" lightline
-"let g:lightline = { 'colorscheme': 'onehalfdark' }
-"key maps"
+
+let g:vscode_style = "dark"
+" For light theme
+"let g:vscode_style = "light"
+" Enable transparent background.
+let g:vscode_transparency = 1
+" Enable italic comment
+let g:vscode_italic_comment = 1
+colorscheme vscode
 
 let mapleader = " "
 
