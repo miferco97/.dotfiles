@@ -9,7 +9,7 @@ git clone https://github.com/VundleVim/Vundle.vim.git ./nvim/.config/nvim/bundle
 #curl -fLo ~/.var/app/io.neovim.nvim/data/nvim/site/autoload/plug.vim --create-dirs \
 #   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-nvim +'PluginInstall' +qa
+nvim +'PlugInstall --sync' +qa
 
 pushd $HOME/.vim/bundle/YouCompleteMe
 python3 install.py --clangd-completer
