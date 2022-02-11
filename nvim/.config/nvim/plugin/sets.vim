@@ -19,4 +19,4 @@ set incsearch
 "set termguicolors"
 set scrolloff=8
 set signcolumn=yes
-set colorcolumn=100
+set colorcolumn=101

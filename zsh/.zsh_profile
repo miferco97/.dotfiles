@@ -1,6 +1,3 @@
-
-cd ~
-
 alias nvim='~/.config/nvim/nvim.appimage'
 alias vim='nvim'
 

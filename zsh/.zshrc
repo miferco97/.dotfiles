@@ -79,8 +79,12 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  tmux
   zsh-autosuggestions
 )
+
+ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOCONNECT=false
 
 source $ZSH/oh-my-zsh.sh
 
@@ -130,8 +134,9 @@ source $ZSH/oh-my-zsh.sh
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
-
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#318ce7,bold"
+# ZSH_AUTOSUGGEST_STRATEGY=(completion history)
+ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
 bindkey '^ ' autosuggest-accept
 
 source $HOME/.zsh_profile
