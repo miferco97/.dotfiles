@@ -1,8 +1,8 @@
 # My .dotfiles
 For setting up the configuration of :
-- NeoVim
-- Tmux
-- Zsh
+- NeoVim (https://neovim.io/)
+- Tmux (http://www.sromero.org/wiki/linux/aplicaciones/tmux)
+- Zsh with OhMyZsh (https://ohmyz.sh/ )
 - i3 (in progress)
 
 ## Setup steps:
@@ -22,6 +22,8 @@ Reload a new terminal
 $ cd ~/.dotfiles
 $ zsh plugin_setup.zsh # Install nvim plugins
 ```
+
+>[INFO] My zsh theme is powerlevel10k, if you want to use the recommended fonts follow this instructions: https://github.com/romkatv/powerlevel10k#fonts
 
 ## Coc languages Servers
 
