@@ -1,29 +1,6 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-" set rtp+=~/.config/nvim/bundle/Vundle.vim
-" call vundle#begin()
-" " let Vundle manage Vundle, required
-" Plugin 'VundleVim/Vundle.vim'
-" Plugin 'ycm-core/YouCompleteMe'
-" Plugin 'nvim-lua/popup.nvim'
-" Plugin 'nvim-lua/plenary.nvim'
-" Plugin 'nvim-telescope/telescope.nvim'
-" Plugin 'nvim-telescope/telescope-fzy-native.nvim'
-" Plugin 'Shatur/neovim-cmake'
-" Plugin 'mfussenegger/nvim-dap'
-" Plugin 'tpope/vim-commentary'
-" Plugin 'github/copilot.vim'
-" Plugin 'rhysd/vim-clang-format'
-" Plugin 'Yggdroot/indentLine'
-" Plugin 'bfrg/vim-cpp-modern'
-" Plugin 'Mofiqul/vscode.nvim'
-" " All of your Plugins must be added before the following line
-" call vundle#end()            " required
-" filetype plugin indent on    " required
-"plugins"
-
 call plug#begin()
 Plug 'VundleVim/Vundle.vim'
 " Plug 'ycm-core/YouCompleteMe'
@@ -41,6 +18,9 @@ Plug 'bfrg/vim-cpp-modern'
 Plug 'Mofiqul/vscode.nvim'
 Plug 'puremourning/vimspector'
 Plug 'mfussenegger/nvim-dap'
+" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
 call plug#end()
 
 let g:vimspector_enable_mappings = 'HUMAN'

@@ -11,7 +11,7 @@ sudo apt install build-essential python3-dev
 #popd 
 
 # install vim-plug
-curl -fLo ~/.var/app/io.neovim.nvim/data/nvim/site/autoload/plug.vim --create-dirs \
+curl -fLo ~/.dotfiles/nvim/.config/nvim/site/autoload/plug.vim --create-dirs \
    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 #for copilot we need to install node js 12 or superior
@@ -20,3 +20,4 @@ sudo apt-get install -y nodejs
 
 # install pulgins in nvim
 nvim +'PlugInstall --sync' +qa
+
