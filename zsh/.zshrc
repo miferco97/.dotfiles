@@ -139,5 +139,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#318ce7,bold"
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
 bindkey '^ ' autosuggest-accept
 
+alias nvim='~/.config/nvim/nvim.appimage'
+
 source $HOME/.zsh_profile
 
