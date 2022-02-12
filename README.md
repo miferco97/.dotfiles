@@ -33,6 +33,7 @@ For installing basic languages run the desired command into nvim:
 
 ```
 :CocInstall coc-clangd
+:CocCommand clangd.install
 ``` 
 
 > Python language server
