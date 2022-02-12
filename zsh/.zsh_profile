@@ -1,18 +1,22 @@
 alias nvim='~/.config/nvim/nvim.appimage'
 alias vim='nvim'
+alias vi='nvim'
 
-#export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0 # in WSL 2
-#export LIBGL_ALWAYS_INDIRECT=1
-#export XDG_RUNTIME_DIR="~/xdg_runtime_dir/"
-#export RUNLEVEL=3
-
-#ROS2
-#source /opt/ros/foxy/setup.bash
-#export PATH=$PATH:/usr/bin/
-#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/include/:/usr/lib/
-
+if [ ! -z ${WSL_DISTRO_NAME} ]; then
+  # in WSL
+  cd ~
+  export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 3>/dev/null):0 # in WSL 2
+  export LIBGL_ALWAYS_INDIRECT=1
+  export XDG_RUNTIME_DIR="~/xdg_runtime_dir/"
+  export RUNLEVEL=3
+else
+  # in native Ubuntu
+  #ROS2
+  #source /opt/ros/foxy/setup.bash
+  #export PATH=$PATH:/usr/bin/
+  #export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/include/:/usr/lib/
+  export AEROSTACK2_STACK=/home/miguel/aerostack2_ws/src/aerostack2                                   
+  source $AEROSTACK2_STACK/scripts/setup_env.bash         
+fi
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib                                            
 export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/usr/local/lib                                        
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64/                                      
-export AEROSTACK2_STACK=/home/miguel/aerostack2_ws/src/aerostack2                                   
-source $AEROSTACK2_STACK/scripts/setup_env.bash         
