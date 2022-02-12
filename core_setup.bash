@@ -3,12 +3,12 @@
 #install curl and tmux
 sudo apt install curl tmux -y
 # install zsh
-sudo apt install zsh -y
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-zsh -c 'print zsh installed correctly :D; zsh -i' && \
-sudo apt-get install fonts-powerline
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k
-git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+sudo apt install zsh -y && \ 
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && \ 
+sudo apt-get install fonts-powerline -y && \
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k && \
+git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions && \
+zsh -c 'print zsh installed correctly :D; zsh -i' 
 
 # install nvim
 pushd $HOME/.dotfiles/nvim/.config/nvim/
@@ -23,3 +23,4 @@ sudo dpkg -i ./keyring.deb
 sudo echo "deb http://debian.sur5r.net/i3/ $(grep '^DISTRIB_CODENAME=' /etc/lsb-release | cut -f2 -d=) universe" >> /etc/apt/sources.list.d/sur5r-i3.list
 sudo apt update
 sudo apt install i3
+
