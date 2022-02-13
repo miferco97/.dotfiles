@@ -10,7 +10,8 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'Shatur/neovim-cmake'
-Plug 'tpope/vim-commentary'
+" Plug 'tpope/vim-commentary'
+Plug 'miferco97/kommentary'
 Plug 'github/copilot.vim'
 Plug 'rhysd/vim-clang-format'
 Plug 'Yggdroot/indentLine'
@@ -74,6 +75,15 @@ let g:cpp_attributes_highlight = 1
 " Highlight struct/class member variables (affects both C and C++ files)
 let g:cpp_member_highlight = 1
 " Highlight C++11 keywords
+ 
+
+lua << EOF
+vim.g.kommentary_create_default_mappings = false
+vim.api.nvim_set_keymap("n", "gcc", "<Plug>kommentary_line_default", {})
+vim.api.nvim_set_keymap("v", "gc", "<Plug>kommentary_visual_singles<C-c>", {})
+vim.api.nvim_set_keymap("v", "ga", "<Plug>kommentary_visual_default<C-c>", {})
+EOF
+
 
 syntax on
 set mouse=a
