@@ -18,9 +18,9 @@ Plug 'bfrg/vim-cpp-modern'
 Plug 'Mofiqul/vscode.nvim'
 Plug 'puremourning/vimspector'
 Plug 'mfussenegger/nvim-dap'
+Plug 'ThePrimeagen/harpoon'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-
 call plug#end()
 
 let g:vimspector_enable_mappings = 'HUMAN'
