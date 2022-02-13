@@ -47,7 +47,23 @@ $ cd $HOME/.local/share/nvim/plugged/vimspector
 $ ./install_gadget.py --all
 ```
 After that you must add a ```.vimspector.json ``` in the root folder of your project with your desired configuration.
-For more info of how to create this file go to the plugin webpage.
+An example ```.vimspector.json``` file for cpp debuggin can be:
+```
+{
+  "configurations" : {
+    "Launch":{
+      "adapter": "vscode-cpptools",
+      "configuration":{
+        "request": "launch",
+        "program": "<YOUR FILE TO RUN: for example ./build/test",
+        "cwd": "${workspaceFolder}",
+        "externalConsole": true,
+        "MIMode": "gdb"
+      }
+    }
+  }
+}
+```
+> [WARN] This debugger does not compile your code, you must compile it before debugging. For compiling C++ projects I use neovim-cmake plugin.
 
-
-
+For more info of how to create this file for the different languages go to the plugin webpage.
