@@ -25,7 +25,7 @@ $ zsh plugin_setup.zsh # Install nvim plugins
 
 >[INFO] My zsh theme is powerlevel10k, if you want to use the recommended fonts follow this instructions: https://github.com/romkatv/powerlevel10k#fonts
 
-## Coc languages Servers
+## Coc languages Servers (https://github.com/neoclide/coc.nvim)
 
 For installing basic languages run the desired command into nvim:
 
@@ -40,3 +40,14 @@ For installing basic languages run the desired command into nvim:
 ```
 :CocInstall coc-pyright
 ``` 
+## Vimspector (https://github.com/puremourning/vimspector#vimspector---a-multi-language-graphical-debugger-for-vim )
+For setup vimspector plugin run: 
+```
+$ cd $HOME/.local/share/nvim/plugged/vimspector
+$ ./install_gadget.py --all
+```
+After that you must add a ```.vimspector.json ``` in the root folder of your project with your desired configuration.
+For more info of how to create this file go to the plugin webpage.
+
+
+
