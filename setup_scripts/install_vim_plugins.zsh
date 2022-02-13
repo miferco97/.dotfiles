@@ -1,7 +1,8 @@
 #!/bin/zsh
 
 source ~/.zsh_profile
-sudo apt install build-essential python3-dev
+sudo apt install build-essential python3-dev -y
+sudo apt install clang-format -y
 
 # install vim-plug
 sh -c "curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
