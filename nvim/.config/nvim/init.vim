@@ -20,6 +20,8 @@ Plug 'Mofiqul/vscode.nvim'
 Plug 'puremourning/vimspector'
 Plug 'mfussenegger/nvim-dap'
 Plug 'ThePrimeagen/harpoon'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 call plug#end()
@@ -76,6 +78,7 @@ let g:cpp_attributes_highlight = 1
 let g:cpp_member_highlight = 1
 " Highlight C++11 keywords
  
+nnoremap <Leader><C-n> :nohl<CR>
 
 lua << EOF
 vim.g.kommentary_create_default_mappings = false
