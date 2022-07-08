@@ -24,6 +24,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'kyazdani42/nvim-web-devicons' " for file icons
+Plug 'kyazdani42/nvim-tree.lua'
+
 call plug#end()
 
 let g:vimspector_enable_mappings = 'HUMAN'
@@ -46,6 +49,7 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
 
+
 nnoremap <CR> o<ESC>
 
 inoremap jj <ESC>
@@ -64,12 +68,16 @@ nnoremap <C-i> <C-i>zz
 vnoremap K :m '<-2<CR>gv=gv
 vnoremap J :m '>+1<CR>gv=gv
 
-" nnoremap gd :YcmCompleter GoTo<CR>e
-" nnoremap gr :YcmCompleter GoToReferences<CR>e
-" nnoremap gh :YcmCompleter GetType<CR>e
-" nnoremap <leader>gd :YcmCompleter GetDoc<CR>e
+" greatest remap ever
+xnoremap <leader>p "_dP
 
-command Trex :Vex | :vertical resize 35
+" next greatest remap ever : asbjornHaland
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nmap <leader>Y "+Y
+
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
 
 let g:cpp_function_highlight = 1
 " Enable highlighting of C++11 attributes
@@ -87,6 +95,27 @@ vim.api.nvim_set_keymap("v", "gc", "<Plug>kommentary_visual_singles<C-c>", {})
 vim.api.nvim_set_keymap("v", "ga", "<Plug>kommentary_visual_default<C-c>", {})
 EOF
 
+" require'nvim-tree'.setup()
+
+command Trex :NvimTreeToggle
+" command Trex :NvimTreeToggle | :vertical resize 35
 
 syntax on
 set mouse=a
+
+" move through windows with <C- dir>
+" nnoremap <C-h> :wincmd h<CR>
+" nnoremap <C-j> :wincmd j<CR>
+" nnoremap <C-k> :wincmd k<CR>
+" nnoremap <C-l> :wincmd l<CR>
+
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+
+augroup highlight_yank
+    autocmd!
+    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 0})
+augroup END
+

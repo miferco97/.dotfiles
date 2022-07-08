@@ -21,3 +21,4 @@ set scrolloff=8
 set signcolumn=yes
 set colorcolumn=101
 set hlsearch
+set splitright

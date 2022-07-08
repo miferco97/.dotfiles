@@ -14,8 +14,69 @@ else
   #source /opt/ros/foxy/setup.bash
   #export PATH=$PATH:/usr/bin/
   #export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/include/:/usr/lib/
-  export AEROSTACK2_STACK=/home/miguel/aerostack2_ws/src/aerostack2                                   
-  source $AEROSTACK2_STACK/scripts/setup_env.bash         
+  # export AEROSTACK2_STACK=/home/miguel/aerostack2_ws/src/aerostack2                                   
+  # source $AEROSTACK2_STACK/scripts/setup_env.bash         
 fi
+
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib                                            
 export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/usr/local/lib                                        
+
+# local variable 
+local USE_ROS=2 # can be 0, 1 or 2
+
+if [ $USE_ROS -eq 1 ]; then
+
+  #ICUAS STUFF 
+  source /opt/ros/noetic/setup.zsh
+  source $HOME/icuas_ws/devel/setup.zsh
+  source $HOME/icuas_ws/src/uav_ros_simulation/ros_packages/uav_ros_stack/miscellaneous/shell_additions/shell_scripts.sh
+  export PATH=$PATH:$HOME/icuas_ws/src/uav_ros_simulation/firmware/ardupilot/Tools/autotest
+  source $HOME/icuas_ws/src/uav_ros_simulation/firmware/ardupilot/Tools/completion/completion.zsh
+  export GAZEBO_PLUGIN_PATH=$GAZEBO_PLUGIN_PATH:$HOME/icuas_ws/build/ardupilot_gazebo
+  export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:$HOME/icuas_ws/src/larics_gazebo_world/models
+  export PATH=$PATH:/home/miguel/icuas_ws/src/icuas22_competition/startup/challenge/
+
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/ros/galactic/opt/yaml_cpp_vendor/lib/
+
+
+elif [ $USE_ROS -eq 2 ]; then
+
+  source /opt/ros/galactic/setup.zsh
+  # # ROS_LOCALHOST_ONLY=1
+  export AEROSTACK2_PATH=/home/miguel/aerostack2_ws/src/aerostack2
+  source ~/mbzirc_ws/install/setup.zsh
+  source $AEROSTACK2_PATH/scripts/setup_env.bash
+  # ROS_LOCALHOST_ONLY=1
+  # export ROS_DOMAIN_ID=2
+  export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+
+  #cosas mias del libyamlcpp
+  # export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/ros/foxy/opt/yaml_cpp_vendor/lib/
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/ros/galactic/opt/yaml_cpp_vendor/lib/
+
+fi
+
+# export AEROSTACK2_STACK=/home/miguel/aerostack2_ws/src/aerostack2                                   
+# source /opt/ros/foxy/setup.zsh
+# source ~/aerostack2_ws/install/setup.zsh
+# export AEROSTACK2_WORKSPACE=/home/miguel/aerostack2_ws/
+#
+# alias as2_arm="ros2 service call /drone0/set_arming_state std_srvs/srv/SetBool data:\ true\ "
+
+# as2_set_ros2_env
+# source ~/aerostack2_ws/install/setup.zsh
+
+# export PATH=/usr/lib/ccache:$PATH
+# source /usr/share/gazebo/setup.sh
+# export PATH=/home/dps/.local/bin:$PATH
+
+
+# source /opt/ros/foxy/setup.zsh
+
+# alias as2_arm_and_offboard="ros2 service call /$AEROSTACK2_SIMULATION_DRONE_ID/set_offboard_mode \ 
+# std_srvs/srv/SetBool data:\ true\ && ros2 service call /$AEROSTACK2_SIMULATION_DRONE_ID/set_arming_state std_srvs/srv/SetBool data:\ true\ "
+#
+
+# export ROS_DISCOVERY_SERVER=192.168.0.134:11811
+#
+# export ROS_DOMAIN_ID=1

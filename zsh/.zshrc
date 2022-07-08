@@ -83,8 +83,8 @@ plugins=(
   zsh-autosuggestions
 )
 
-ZSH_TMUX_AUTOSTART=true
-ZSH_TMUX_AUTOCONNECT=false
+#ZSH_TMUX_AUTOSTART=true
+#ZSH_TMUX_AUTOCONNECT=false
 
 source $ZSH/oh-my-zsh.sh
 
@@ -136,10 +136,11 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#318ce7,bold"
 # ZSH_AUTOSUGGEST_STRATEGY=(completion history)
+# ZSH_AUTOSUGGEST_STRATEGY=(completion match_prev_cmd)
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
-bindkey '^ ' autosuggest-accept
+# bindkey '^ ' autosuggest-accept
 
-alias nvim='~/.config/nvim/nvim.appimage'
+# alias nvim='~/.config/nvim/nvim.appimage'
 
 # Bind arrows to local history
 bindkey "${key[Up]}" up-line-or-local-history
@@ -164,4 +165,3 @@ bindkey "^[[1;5A" up-line-or-history    # [CTRL] + Cursor up
 bindkey "^[[1;5B" down-line-or-history  # [CTRL] + Cursor down
 
 source $HOME/.zsh_profile
-
