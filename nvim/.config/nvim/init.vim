@@ -11,6 +11,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'Shatur/neovim-cmake'
 " Plug 'tpope/vim-commentary'
+Plug 'akinsho/toggleterm.nvim', {'tag' : 'v2.*'}
 Plug 'miferco97/kommentary'
 Plug 'github/copilot.vim'
 Plug 'rhysd/vim-clang-format'
@@ -118,4 +119,26 @@ augroup highlight_yank
     autocmd!
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 100})
 augroup END
+
+
+lua << EOF
+require("toggleterm").setup{
+  start_in_insert = true,
+  persist_mode = true, -- if set to true (default) the previous terminal mode will be remembered
+  close_on_exit = true -- close the terminal window when the process exits
+  }
+function _G.set_terminal_keymaps()
+  local opts = {noremap = true}
+  vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', 'jj', [[<C-\><C-n>]], opts)
+end
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+EOF
+
+autocmd TermEnter term://*toggleterm#*
+      \ tnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
+
+nnoremap <C-t> :ToggleTerm<CR>
+
 

@@ -46,7 +46,7 @@ elif [ $USE_ROS -eq 2 ]; then
   export AEROSTACK2_PATH=/home/miguel/aerostack2_ws/src/aerostack2
   source ~/mbzirc_ws/install/setup.zsh
   source $AEROSTACK2_PATH/scripts/setup_env.bash
-  # ROS_LOCALHOST_ONLY=1
+  ROS_LOCALHOST_ONLY=1
   # export ROS_DOMAIN_ID=2
   export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 
@@ -80,3 +80,10 @@ fi
 # export ROS_DISCOVERY_SERVER=192.168.0.134:11811
 #
 # export ROS_DOMAIN_ID=1
+#
+
+export ACADOS_ROOT_DIR="/home/miguel/acado_course/acados"
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"$ACADOS_ROOT_DIR/lib"
+export ACADOS_SOURCE_DIR="$ACADOS_ROOT_DIR"
+
+export RCUTILS_CONSOLE_OUTPUT_FORMAT="[{severity} {time}] [{name}]: {message}" 
