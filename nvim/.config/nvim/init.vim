@@ -3,14 +3,12 @@ filetype off                  " required
 
 call plug#begin()
 Plug 'VundleVim/Vundle.vim'
-" Plug 'ycm-core/YouCompleteMe'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'Shatur/neovim-cmake'
-" Plug 'tpope/vim-commentary'
 Plug 'akinsho/toggleterm.nvim', {'tag' : 'v2.*'}
 Plug 'miferco97/kommentary'
 Plug 'github/copilot.vim'
@@ -23,10 +21,9 @@ Plug 'mfussenegger/nvim-dap'
 Plug 'ThePrimeagen/harpoon'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
-" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'kyazdani42/nvim-tree.lua'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
@@ -49,8 +46,6 @@ let mapleader = " "
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
-
-
 nnoremap <CR> o<ESC>
 
 inoremap jj <ESC>
@@ -120,7 +115,6 @@ augroup highlight_yank
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 100})
 augroup END
 
-
 lua << EOF
 require("toggleterm").setup{
   start_in_insert = true,
@@ -140,5 +134,4 @@ autocmd TermEnter term://*toggleterm#*
       \ tnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
 
 nnoremap <C-t> :ToggleTerm<CR>
-
 
