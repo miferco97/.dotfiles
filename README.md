@@ -32,7 +32,7 @@ For installing basic languages run the desired command into nvim:
 > C++ language server
 
 ```
-:CocInstall coc-clangd
+:CocInstall coc-clangd@0.25.1
 :CocCommand clangd.install
 ``` 
 
