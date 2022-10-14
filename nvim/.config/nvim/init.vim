@@ -8,7 +8,8 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
-Plug 'Shatur/neovim-cmake'
+" Plug 'Shatur/neovim-cmake'
+Plug 'Civitasv/cmake-tools.nvim'
 Plug 'akinsho/toggleterm.nvim', {'tag' : 'v2.*'}
 Plug 'miferco97/kommentary'
 Plug 'github/copilot.vim'
@@ -24,6 +25,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'airblade/vim-gitgutter'
+Plug 'miferco97/ros2-debugger-plugin'
 
 call plug#end()
 
@@ -90,6 +92,7 @@ vim.api.nvim_set_keymap("n", "gcc", "<Plug>kommentary_line_default", {})
 vim.api.nvim_set_keymap("v", "gc", "<Plug>kommentary_visual_singles<C-c>", {})
 vim.api.nvim_set_keymap("v", "ga", "<Plug>kommentary_visual_default<C-c>", {})
 EOF
+
 
 " require'nvim-tree'.setup()
 
