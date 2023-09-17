@@ -3,7 +3,6 @@ For setting up the configuration of :
 - NeoVim (https://neovim.io/)
 - Tmux (http://www.sromero.org/wiki/linux/aplicaciones/tmux)
 - Zsh with OhMyZsh (https://ohmyz.sh/ )
-- i3 (in progress)
 
 ## Setup steps:
 
@@ -67,3 +66,15 @@ An example ```.vimspector.json``` file for cpp debuggin can be:
 > [WARN] This debugger does not compile your code, you must compile it before debugging. For compiling C++ projects I use neovim-cmake plugin.
 
 For more info of how to create this file for the different languages go to the plugin webpage.
+
+
+
+## Common errors:
+
+
+If c++ autocompletion fails with std libs run: [See this post](https://stackoverflow.com/questions/74785927/clangd-doesnt-recognize-standard-headers)
+
+```
+$ apt install libstdc++-12-dev
+
+```

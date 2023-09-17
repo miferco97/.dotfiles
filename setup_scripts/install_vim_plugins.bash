@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 source ~/.zsh_profile
 sudo apt install build-essential python3-dev -y
