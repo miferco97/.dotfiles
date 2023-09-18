@@ -2,3 +2,4 @@
 ~/
 *.appimage
 *.deb
+.undodir/
