@@ -1,9 +1,9 @@
 {
   "languageserver": {
-    "lua":{
+    "lua": {
       "command": "lua-lsp",
       "filetypes": ["lua"],
-      "settings":{
+      "settings": {
         "Lua": {
           "workspace.library": {
             "/usr/share/nvim/runtime/lua": true,
@@ -11,11 +11,23 @@
             "/usr/share/nvim/runtime/lua/vim/lsp": true
           },
           "diagnostics": {
-            "globals": [ "vim" ]
+            "globals": ["vim"]
           }
         }
       }
     }
-  }
+  },
+  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/16.0.2/clangd_16.0.2/bin/clangd",
+  "clangd.compilationDatabaseCandidates": [
+    "${workspaceFolder}/build/",
+    "${workspaceFolder}"
+  ],
+  "semanticTokens.enable": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "lua",
+    "python",
+    "json",
+    "css",
+    "xml"
+  ]
 }
-
