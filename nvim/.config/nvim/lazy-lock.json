@@ -12,6 +12,7 @@
   "plenary.nvim": { "branch": "master", "commit": "9ce85b0f7dcfe5358c0be937ad23e456907d410b" },
   "telescope.nvim": { "branch": "master", "commit": "b543aaa2c9cf8123ed2fe7dbb6c211a9cd415124" },
   "undotree": { "branch": "master", "commit": "0e11ba7325efbbb3f3bebe06213afa3e7ec75131" },
+  "vim-clang-format": { "branch": "master", "commit": "6b791825ff478061ad1c57b21bb1ed5a5fd0eb29" },
   "vim-fugitive": { "branch": "master", "commit": "99db68d9b3304580bd383da7aaee05c7a954a344" },
   "vscode.nvim": { "branch": "main", "commit": "11b212096a0b2056fc8acaf31c0d62d656b6fd2d" }
 }

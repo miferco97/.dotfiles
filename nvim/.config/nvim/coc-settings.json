@@ -24,6 +24,7 @@
   ],
   "semanticTokens.enable": true,
   "coc.preferences.formatOnSaveFiletypes": [
+    "cpp",
     "lua",
     "python",
     "json",
