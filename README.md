@@ -4,6 +4,20 @@ For setting up the configuration of :
 - Tmux (http://www.sromero.org/wiki/linux/aplicaciones/tmux)
 - Zsh with OhMyZsh (https://ohmyz.sh/ )
 
+
+## Install dependencies:
+```
+# install NeoVim
+sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo apt update
+sudo apt install neovim
+
+# install Neovim plugins dependencies
+sudo apt-get install xclip ripgrep
+pip3 install pynvim 
+
+```
+
 ## Setup steps:
 
 1. Clone the repository into ```~/.dotfiles```
@@ -31,7 +45,7 @@ For installing basic languages run the desired command into nvim:
 > C++ language server
 
 ```
-:CocInstall coc-clangd@0.25.1
+:CocInstall coc-clangd
 :CocCommand clangd.install
 ``` 
 

@@ -64,6 +64,7 @@ return{
     end
 
     keyset("n", "K", '<CMD>lua _G.show_docs()<CR>', {silent = true})
+    keyset("n", "gh", '<CMD>lua _G.show_docs()<CR>', {silent = true})
 
 
     -- Highlight the symbol and its references on a CursorHold event(cursor is idle)
@@ -178,7 +179,7 @@ return{
    -- -- Show commands
    -- keyset("n", "<space>c", ":<C-u>CocList commands<cr>", opts)
    -- -- Find symbol of current document
-   -- keyset("n", "<space>o", ":<C-u>CocList outline<cr>", opts)
+   keyset("n", "<space>o", ":<C-u>CocList outline<cr>", opts)
    -- -- Search workspace symbols
    -- keyset("n", "<space>s", ":<C-u>CocList -I symbols<cr>", opts)
    -- -- Do default action for next item
