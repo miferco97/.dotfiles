@@ -1,5 +1,34 @@
 {
-  "python.pythonPath": "/usr/bin/python3",
-  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.1/clangd_15.0.1/bin/clangd",
-  "clangd.inlayHints.enable": false
+  "languageserver": {
+    "lua": {
+      "command": "lua-lsp",
+      "filetypes": ["lua"],
+      "settings": {
+        "Lua": {
+          "workspace.library": {
+            "/usr/share/nvim/runtime/lua": true,
+            "/usr/share/nvim/runtime/lua/vim": true,
+            "/usr/share/nvim/runtime/lua/vim/lsp": true
+          },
+          "diagnostics": {
+            "globals": ["vim"]
+          }
+        }
+      }
+    }
+  },
+  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/16.0.2/clangd_16.0.2/bin/clangd",
+  "clangd.compilationDatabaseCandidates": [
+    "${workspaceFolder}/build/",
+    "${workspaceFolder}"
+  ],
+  "semanticTokens.enable": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "cpp",
+    "lua",
+    "python",
+    "json",
+    "css",
+    "xml"
+  ]
 }
