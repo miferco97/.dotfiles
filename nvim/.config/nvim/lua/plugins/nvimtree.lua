@@ -24,7 +24,7 @@ return{
         group_empty = true,
       },
       filters = {
-        dotfiles = true,
+        dotfiles = false,
       },
     })
     require('nvim-web-devicons').setup()
