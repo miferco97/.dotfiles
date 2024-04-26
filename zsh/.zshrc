@@ -143,8 +143,8 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#318ce7,bold"
 # ZSH_AUTOSUGGEST_STRATEGY=(completion history)
-# ZSH_AUTOSUGGEST_STRATEGY=(completion match_prev_cmd)
-ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
+ZSH_AUTOSUGGEST_STRATEGY=(completion match_prev_cmd)
+# ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
 # bindkey '^ ' autosuggest-accept
 
 # alias nvim='~/.config/nvim/nvim.appimage'
@@ -173,5 +173,21 @@ bindkey "^[[1;5B" down-line-or-history  # [CTRL] + Cursor down
 
 source $HOME/.zsh_profile
 
-eval "$(register-python-argcomplete3 ros2)"
-eval "$(register-python-argcomplete3 colcon)"
+# eval "$(register-python-argcomplete3 ros2)"
+# eval "$(register-python-argcomplete3 colcon)"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/home/miguel/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/home/miguel/miniconda3/etc/profile.d/conda.sh" ]; then
+#         . "/home/miguel/miniconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/home/miguel/miniconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# <<< conda initialize <<<
+
