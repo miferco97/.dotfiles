@@ -17,14 +17,13 @@
       }
     }
   },
-  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/16.0.2/clangd_16.0.2/bin/clangd",
+  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/18.1.3/clangd_18.1.3/bin/clangd",
   "clangd.compilationDatabaseCandidates": [
     "${workspaceFolder}/build/",
     "${workspaceFolder}"
   ],
   "semanticTokens.enable": true,
   "coc.preferences.formatOnSaveFiletypes": [
-    "cpp",
     "lua",
     "python",
     "json",
