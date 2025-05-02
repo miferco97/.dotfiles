@@ -50,6 +50,9 @@ return{
     keyset("n", "gi", "<Plug>(coc-implementation)", {silent = true})
     keyset("n", "gr", "<Plug>(coc-references)", {silent = true})
 
+    -- :CocCommand clangd.switchSourceHeader
+    keyset("n", "<leader>go", ":CocCommand clangd.switchSourceHeader<CR>", {silent = true})
+
 
     -- Use K to show documentation in preview window
     function _G.show_docs()

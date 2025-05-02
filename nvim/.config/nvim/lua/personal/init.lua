@@ -36,12 +36,12 @@ augroup END
 --   end
 -- })
 
-vim.api.nvim_create_autocmd({"BufWritePost"},
-    {
-    pattern = {"*.cpp", "*.hpp", "*.c", "*.h"},
-        callback = function()
-            vim.cmd("silent ! ament_uncrustify --reformat %")
-            -- vim.cmd("edit")
-        end,
-    }
-)
+-- vim.api.nvim_create_autocmd({"BufWritePost"},
+--     {
+--     pattern = {"*.cpp", "*.hpp", "*.c", "*.h"},
+--         callback = function()
+--             vim.cmd("silent ! ament_uncrustify --reformat %")
+--             -- vim.cmd("edit")
+--         end,
+--     }
+-- )
