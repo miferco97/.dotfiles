@@ -18,7 +18,8 @@ POWERLINE_DIR=$(pip show powerline-status | grep Location | cut -d' ' -f2)
 
 # HSTR configuration - add this to ~/.bashrc
 alias hh=hstr                    # hh to be alias for hstr
-export HSTR_CONFIG=hicolor,prompt-bottom
+# color with bottom bar 
+export HSTR_CONFIG=hicolor,prompt-bottom,help-on-opposite-side
 shopt -s histappend              # append new history items to .bash_history
 export HISTCONTROL=ignorespace   # leading space hides commands from history
 export HISTFILESIZE=10000        # increase history file size (default is 500)
