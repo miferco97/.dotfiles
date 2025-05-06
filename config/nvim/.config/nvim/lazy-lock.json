@@ -4,6 +4,7 @@
   "copilot.vim": { "branch": "release", "commit": "87038123804796ca7af20d1b71c3428d858a9124" },
   "harpoon": { "branch": "master", "commit": "1bc17e3e42ea3c46b33c0bbad6a880792692a1b3" },
   "kommentary": { "branch": "main", "commit": "43c0288dd174da5d2d3f879da73d70ef959058d2" },
+<<<<<<< Updated upstream:nvim/.config/nvim/lazy-lock.json
   "lazy.nvim": { "branch": "main", "commit": "cf8ecc2c5e4332760431a33534240b0cbc6680ab" },
   "lualine.nvim": { "branch": "master", "commit": "b431d228b7bbcdaea818bdc3e25b8cdbe861f056" },
   "nvim-bqf": { "branch": "main", "commit": "1b24dc6050c34e8cd377b6b4cd6abe40509e0187" },
@@ -19,4 +20,20 @@
   "vim-fugitive": { "branch": "master", "commit": "d4877e54cef67f5af4f950935b1ade19ed6b7370" },
   "vimspector": { "branch": "master", "commit": "ecb4669e5641abc3099b5a0b907f15ba3ceabd02" },
   "vscode.nvim": { "branch": "main", "commit": "7de58b7a6d55fe48475d0ba2fddbcec871717761" }
+=======
+  "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
+  "lualine.nvim": { "branch": "master", "commit": "2248ef254d0a1488a72041cfb45ca9caada6d994" },
+  "nvim-lint": { "branch": "master", "commit": "861a04313501563bb1b11f125ae9b7237a517b9b" },
+  "nvim-tree.lua": { "branch": "master", "commit": "874ae6e9445a5eb5ba430e5fd10212450a261ad7" },
+  "nvim-treesitter": { "branch": "master", "commit": "075a64addc33390028ea124a1046a43497f05cd1" },
+  "nvim-web-devicons": { "branch": "master", "commit": "3fafeea5f339223e888fd15eb4032260849cb038" },
+  "plenary.nvim": { "branch": "master", "commit": "50012918b2fc8357b87cff2a7f7f0446e47da174" },
+  "telescope.nvim": { "branch": "master", "commit": "20bf20500c95208c3ac0ef07245065bf94dcab15" },
+  "toggleterm.nvim": { "branch": "main", "commit": "faee9d60428afc7857e0927fdc18daa6c409fa64" },
+  "undotree": { "branch": "master", "commit": "36ff7abb6b60980338344982ad4cdf03f7961ecd" },
+  "vim-flake8": { "branch": "master", "commit": "a245098a174f30feff1b4387526876975042084a" },
+  "vim-fugitive": { "branch": "master", "commit": "46eaf8918b347906789df296143117774e827616" },
+  "vimspector": { "branch": "master", "commit": "66617adda22d29c60ec2ee9bcb854329352ada80" },
+  "vscode.nvim": { "branch": "main", "commit": "563e3f671543ba14f23ccb57020a428add640d02" }
+>>>>>>> Stashed changes:config/nvim/.config/nvim/lazy-lock.json
 }
