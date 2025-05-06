@@ -2,19 +2,12 @@
 For setting up the configuration of :
 - NeoVim (https://neovim.io/)
 - Tmux (http://www.sromero.org/wiki/linux/aplicaciones/tmux)
-- Zsh with OhMyZsh (https://ohmyz.sh/ )
 
+## previous deps :
 
-## Install dependencies:
 ```
-# install NeoVim
-sudo add-apt-repository ppa:neovim-ppa/unstable
-sudo apt update
-sudo apt install neovim
-
-# install Neovim plugins dependencies
-sudo apt-get install xclip ripgrep
-pip3 install pynvim 
+# install git
+sudo apt install git -y
 
 ```
 
@@ -28,17 +21,23 @@ $ git clone https://github.com/miferco97/.dotfiles.git $HOME/.dotfiles
 
 Run the following commands: 
 ```
-$ cd ~/.dotfiles
-$ bash core_setup.bash # Download and install Neovim, Tmux, Zsh and i3
+./env_setup.bash
 
-Reload a new terminal
-$ cd ~/.dotfiles
-$ zsh plugin_setup.zsh # Install nvim plugins
+# load a tmux pane and do Ctrl-A + I (capital i) for installing tmux plugins 
+
+tmux 
+(inside tmux) Ctrl-A + I 
+exit
 ```
 
->[INFO] My zsh theme is powerlevel10k, if you want to use the recommended fonts follow this instructions: https://github.com/romkatv/powerlevel10k#fonts
+Reboot after completion.
 
-## Coc languages Servers (https://github.com/neoclide/coc.nvim)
+
+## Vim further setup 
+
+Tools for end installing nvim plugins 
+
+### Coc languages Servers (https://github.com/neoclide/coc.nvim)
 
 For installing basic languages run the desired command into nvim:
 
@@ -53,7 +52,7 @@ For installing basic languages run the desired command into nvim:
 ```
 :CocInstall coc-pyright
 ``` 
-## Vimspector (https://github.com/puremourning/vimspector#vimspector---a-multi-language-graphical-debugger-for-vim )
+### Vimspector (https://github.com/puremourning/vimspector#vimspector---a-multi-language-graphical-debugger-for-vim )
 For setup vimspector plugin run: 
 ```
 $ cd $HOME/.local/share/nvim/plugged/vimspector
@@ -83,7 +82,7 @@ For more info of how to create this file for the different languages go to the p
 
 
 
-## Common errors:
+## Troubleshoot:
 
 
 If c++ autocompletion fails with std libs run: [See this post](https://stackoverflow.com/questions/74785927/clangd-doesnt-recognize-standard-headers)
