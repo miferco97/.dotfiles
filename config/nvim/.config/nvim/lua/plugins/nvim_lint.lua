@@ -6,7 +6,7 @@ return{
 	require('lint').linters_by_ft =
   {
     cpp = {'cppcheck','cpplint'},
-    -- python = {'pydocstyle', 'pylint'},
+    python = {'pydocstyle', 'pylint'},
     cmake = {'cmakelint'},
   }
 

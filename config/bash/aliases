@@ -1,0 +1,9 @@
+#!/bin/bash
+#aliases
+
+alias resource='source ~/.bashrc'
+alias vim='nvim'
+alias enable_multicast='sudo ip link set lo multicast on'
+
+alias l='ls -l'
+
