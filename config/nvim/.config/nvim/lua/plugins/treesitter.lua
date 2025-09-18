@@ -1,39 +1,41 @@
--- This plugin is for improving text highlight
+-- Plugin which gives the editor extra information about how to parse the current language
+return {
+	{
+		"nvim-treesitter/nvim-treesitter",
+		enabled = true,
+		event = { "BufReadPost", "BufNewFile" },
+		build = ":TSUpdate",
+		main = "nvim-treesitter.configs",
 
-return{
-	'nvim-treesitter/nvim-treesitter',
-	build = ':TSUpdate',
-	cmd= {'TSUpdateSync'},
-	opts = {
-		highlight = {enable= true},
-		indent = {enable= true},
-		ensure_installed= {
-			'bash',
-			'c',
-			'cpp',
-			'json',
-			'lua',
-			'luadoc',
-			'luap',
-			'markdown',
-			'python',
-			'vim',
-			'vimdoc',
-			'yaml',
+		opts = {
+			ensure_installed = {
+				"vim",
+				"vimdoc",
+				"markdown",
+				"lua",
+				"python",
+				"c",
+				"cpp",
+			},
+			sync_install = false,
+			auto_install = true,
+
+			highlight = { enable = true },
+			indent = { enable = true },
+			-- autotag = { enable = true },
+			autopairs = { enable = true },
 		},
 	},
-	config = function(_, opts)
-	    if type(opts.ensure_installed) == 'table' then
-	      ---@type table<string, boolean>
-	      local added = {}
-	      opts.ensure_installed = vim.tbl_filter(function(lang)
-		if added[lang] then
-		  return false
-		end
-		added[lang] = true
-		return true
-	      end, opts.ensure_installed)
-	    end
-	    require('nvim-treesitter.configs').setup(opts)
-    	end,
+	{
+		"windwp/nvim-ts-autotag",
+		enabled = true,
+		event = "VeryLazy",
+		opts = {},
+	},
+	{
+		"windwp/nvim-autopairs",
+		enabled = true,
+		event = "InsertEnter",
+		opts = {},
+	},
 }

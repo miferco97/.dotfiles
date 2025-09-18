@@ -1,5 +1,5 @@
-require('personal.remap')
-require('personal.sets')
+require("personal.remap")
+require("personal.sets")
 
 vim.cmd([[
 augroup filetypedetect
@@ -7,6 +7,14 @@ augroup filetypedetect
 augroup END
 ]])
 
+-- -- Do not start a new line with a comment, if on a comment line
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+	callback = function()
+		vim.cmd("set formatoptions-=cro")
+	end,
+})
+
+vim.g.have_nerd_font = true
 
 -- -- Example: Map <leader>x to execute a shell command with buffer path using Lua
 -- vim.api.nvim_set_keymap('n', '<leader>sc', ':lua ExecuteShellCommand()<CR>', { noremap = true, silent = true })
@@ -23,10 +31,9 @@ augroup END
 --   command = "echo 'Entering a C or C++ file : ' .. buffer_path",
 -- })
 
-
 -- vim.api.nvim_create_autocmd({"BufWritePre"}, {
 --   pattern = {"*.cpp", "*.hpp", "*.c", "*.h"},
---   callback = function() 
+--   callback = function()
 --     buffer_path = vim.fn.expand('%:p')
 --     job_id = vim.fn.jobstart({'ament_uncrustify', '--reformat', buffer_path}, {
 --       on_exit = function(job_id, data, event)
@@ -36,12 +43,12 @@ augroup END
 --   end
 -- })
 
-vim.api.nvim_create_autocmd({"BufWritePost"},
-    {
-    pattern = {"*.cpp", "*.hpp", "*.c", "*.h"},
-        callback = function()
-            vim.cmd("silent ! ament_uncrustify --reformat %")
-            -- vim.cmd("edit")
-        end,
-    }
-)
+-- vim.api.nvim_create_autocmd({"BufWritePost"},
+--     {
+--     pattern = {"*.cpp", "*.hpp", "*.c", "*.h"},
+--         callback = function()
+--             vim.cmd("silent ! ament_uncrustify --reformat %")
+--             -- vim.cmd("edit")
+--         end,
+--     }
+-- )
