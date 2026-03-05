@@ -51,14 +51,28 @@ return {
 					map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 					map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
 					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+					map("<leader>o", function()
+						local params = { uri = vim.uri_from_bufnr(0) }
+						vim.lsp.buf_request(0, "textDocument/switchSourceHeader", params, function(err, result)
+							if result then
+								vim.cmd("edit " .. vim.uri_to_fname(result))
+							end
+						end)
+					end, "Switch Header/Source")
+
+					local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+					if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_hover) then
+						map("K", function()
+							require("pretty_hover").hover()
+						end, "Hover Documentation")
+					end
 
 					-- The following two autocommands are used to highlight references of the
 					-- word under your cursor when your cursor rests there for a little while.
 					--    See `:help CursorHold` for information about when this is executed
 					--
 					-- When you move your cursor, the highlights will be cleared (the second autocommand).
-
-					local client = vim.lsp.get_client_by_id(event.data.client_id)
 					if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
 						local highlight_augroup =
 							vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
@@ -94,6 +108,34 @@ return {
 						vim.g.virtual_text = not vim.g.virtual_text
 						vim.diagnostic.config({ virtual_text = vim.g.virtual_text })
 					end, "[T]oggle [V]irtual Text")
+
+					-- Auto hover after 1 second
+					if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_hover) then
+						local hover_timer = nil
+						vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "InsertEnter" }, {
+							buffer = event.buf,
+							callback = function()
+								if hover_timer then
+									hover_timer:stop()
+								end
+							end,
+						})
+						vim.api.nvim_create_autocmd("CursorHold", {
+							buffer = event.buf,
+							callback = function()
+								if not vim.g.auto_hover then
+									return
+								end
+								hover_timer = vim.defer_fn(function()
+									vim.lsp.buf.hover({ focusable = false, focus = false, border = "rounded" })
+								end, 950) -- 950ms + 50ms updatetime = ~1s
+							end,
+						})
+						map("<leader>tk", function()
+							vim.g.auto_hover = not vim.g.auto_hover
+							print("Auto hover: " .. (vim.g.auto_hover and "enabled" or "disabled"))
+						end, "[T]oggle auto hover ([K])")
+					end
 				end,
 			})
 
@@ -105,7 +147,7 @@ return {
 				end
 				vim.diagnostic.config({
 					signs = { text = diagnostic_signs },
-					virtual_text = vim.g.virtual_text or false,
+					virtual_text = vim.g.virtual_text ~= false,
 					update_in_insert = false,
 					underline = true,
 					severity_sort = true,
@@ -167,8 +209,8 @@ return {
 
 			local formatters = {
 				"stylua",
-				"black",
-				"prettier",
+				-- "black",
+				-- "prettier",
 				"beautysh",
 				-- "clang-format",
 			}

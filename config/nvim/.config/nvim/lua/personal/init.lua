@@ -1,6 +1,9 @@
 require("personal.remap")
 require("personal.sets")
 
+-- Python3 provider for plugins like vimspector
+vim.g.python3_host_prog = '/usr/bin/python3'
+
 vim.cmd([[
 augroup filetypedetect
   au! BufRead,BufNewFile *.launch setfiletype xml
@@ -15,6 +18,9 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 })
 
 vim.g.have_nerd_font = true
+vim.g.auto_hover = true
+
+vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#89b4fa" })
 
 -- -- Example: Map <leader>x to execute a shell command with buffer path using Lua
 -- vim.api.nvim_set_keymap('n', '<leader>sc', ':lua ExecuteShellCommand()<CR>', { noremap = true, silent = true })

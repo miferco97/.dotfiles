@@ -5,7 +5,15 @@ return {
     require("toggleterm").setup{
     start_in_insert = true,
     persist_mode = true, -- if set to true (default) the previous terminal mode will be remembered
-    close_on_exit = true -- close the terminal window when the process exits
+    close_on_exit = true, -- close the terminal window when the process exits
+    highlights = {
+      Normal = {
+        guibg = "black",
+      },
+      NormalFloat = {
+        guibg = "black",
+      },
+    },
     }
     function _G.set_terminal_keymaps()
     local opts = {noremap = true}
