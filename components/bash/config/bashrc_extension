@@ -2,7 +2,7 @@
 
 # powerline setup
 
-source ${HOME}/.dotfiles/config/bash/aliases
+source ${HOME}/.bashrc.d/aliases
 
 PATH=${PATH}:$HOME/.local/bin
 

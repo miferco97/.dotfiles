@@ -1,2 +1,4 @@
 .undodir/
 .netrwhist
+.claude/
+__pycache__/

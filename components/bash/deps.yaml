@@ -1,4 +1,6 @@
 name: Bash config
 order: 4
-link: .bashrc.d
+link:
+  - .: .bashrc.d
+  - powerline: .config/powerline
 check: test -d ~/.bashrc.d
