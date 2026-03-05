@@ -1,0 +1,6 @@
+name: Essentials (git, curl)
+order: 0
+check: git --version && curl --version
+apt:
+  - git
+  - curl

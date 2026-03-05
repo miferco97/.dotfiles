@@ -1,0 +1,10 @@
+name: Claude Code hooks
+order: 6
+requires:
+  - essentials
+link: .claude/hooks
+check: test -f ~/.claude/hooks/notify-done.sh
+apt:
+  - jq
+  - inotify-tools
+  - pipewire

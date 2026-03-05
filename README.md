@@ -1,73 +1,76 @@
-# My .dotfiles
-For setting up the configuration of :
-- NeoVim (https://neovim.io/)
-- Tmux (http://www.sromero.org/wiki/linux/aplicaciones/tmux)
+# .dotfiles
 
-## previous deps :
+Personal dotfiles with a component-based architecture and interactive TUI manager.
 
-```
-# install git
-sudo apt install git -y
+## Quick Start
 
-```
-
-## Setup steps:
-
-1. Clone the repository into ```~/.dotfiles```
-
-```
-$ git clone https://github.com/miferco97/.dotfiles.git $HOME/.dotfiles 
+```bash
+git clone https://github.com/miferco97/.dotfiles.git $HOME/.dotfiles
+cd $HOME/.dotfiles
+./setup.bash
 ```
 
-Run the following commands: 
+The TUI auto-installs its own prerequisites (gum, python3, pip, pyyaml) on first run.
+
+## Components
+
+| Component | Description | Requires |
+|-----------|-------------|----------|
+| **essentials** | git, curl | -- |
+| **nvim** | NeoVim, Node.js 20, Nerd Fonts, ripgrep, xclip, C++ tools | essentials |
+| **tmux** | tmux, hstr, powerline, tpm | essentials |
+| **bash** | Shell config (aliases, bashrc extension via `~/.bashrc.d`) | -- |
+| **docker** | Docker Engine, NVIDIA Container Toolkit (if GPU detected) | essentials |
+| **claude** | Claude Code notification daemon (GNOME + PipeWire) | essentials |
+
+Each component lives in `components/<name>/` with:
+- `deps.yaml` -- manifest (name, order, requires, check, apt/pip/ppa deps, symlink target)
+- `setup.bash` -- post-install script (optional)
+- `uninstall.bash` -- cleanup script (optional)
+- `config/` -- files symlinked into `$HOME` (optional)
+
+## TUI Manager
+
+`./setup.bash` provides an interactive menu:
+
+- **Install** -- select components to install (all pre-selected, installed ones grayed out)
+- **Uninstall** -- remove components (symlinks, cleanup scripts, optionally apt packages)
+- **Reinstall** -- full re-install (unlink + install)
+- **Update** -- re-run setup scripts and refresh symlinks for installed components
+- **Refresh status** -- rescan and display component + symlink health
+
+Dependencies between components are resolved automatically. Symlink issues are flagged in the status display.
+
+## Symlink Manager
+
+```bash
+python3 install.py                        # create all symlinks
+python3 install.py --dry-run              # preview
+python3 install.py --unlink               # remove all symlinks
+python3 install.py --only bash,claude     # filter to specific components
 ```
-./env_setup.bash
 
-# load a tmux pane and do Ctrl-A + I (capital i) for installing tmux plugins 
+Existing files are backed up to `*.bak` before overwriting.
 
-tmux 
-(inside tmux) Ctrl-A + I 
-exit
-```
+## NeoVim
 
-Reboot after completion.
+Plugin manager: [lazy.nvim](https://github.com/folke/lazy.nvim). Config entry point: `components/nvim/config/init.lua`.
 
+**LSP servers** (auto-installed via mason.nvim): lua_ls, pyright, clangd, bashls, ts_ls, marksman
 
-## Vim further setup 
+**Formatters**: stylua (Lua), ruff (Python), beautysh (Bash), clang-format/ament_uncrustify (C/C++)
 
-Tools for end installing nvim plugins 
+### Vimspector (Debugging)
 
-### Coc languages Servers (https://github.com/neoclide/coc.nvim)
-
-For installing basic languages run the desired command into nvim:
-
-> C++ language server
-
-```
-:CocInstall coc-clangd
-:CocCommand clangd.install
-``` 
-
-> Python language server
-```
-:CocInstall coc-pyright
-``` 
-### Vimspector (https://github.com/puremourning/vimspector#vimspector---a-multi-language-graphical-debugger-for-vim )
-For setup vimspector plugin run: 
-```
-$ cd $HOME/.local/share/nvim/plugged/vimspector
-$ ./install_gadget.py --all
-```
-After that you must add a ```.vimspector.json ``` in the root folder of your project with your desired configuration.
-An example ```.vimspector.json``` file for cpp debuggin can be:
-```
+Add a `.vimspector.json` to your project root. Example for C++:
+```json
 {
-  "configurations" : {
-    "Launch":{
+  "configurations": {
+    "Launch": {
       "adapter": "vscode-cpptools",
-      "configuration":{
+      "configuration": {
         "request": "launch",
-        "program": "<YOUR FILE TO RUN: for example ./build/test",
+        "program": "./build/your_binary",
         "cwd": "${workspaceFolder}",
         "externalConsole": true,
         "MIMode": "gdb"
@@ -76,18 +79,15 @@ An example ```.vimspector.json``` file for cpp debuggin can be:
   }
 }
 ```
-> [WARN] This debugger does not compile your code, you must compile it before debugging. For compiling C++ projects I use neovim-cmake plugin.
 
-For more info of how to create this file for the different languages go to the plugin webpage.
+> Vimspector does not compile your code -- compile before debugging.
 
+## Troubleshooting
 
-
-## Troubleshoot:
-
-
-If c++ autocompletion fails with std libs run: [See this post](https://stackoverflow.com/questions/74785927/clangd-doesnt-recognize-standard-headers)
-
+**C++ autocompletion fails with std libs:**
+```bash
+sudo apt install libstdc++-12-dev
 ```
-$ apt install libstdc++-12-dev
+See [this post](https://stackoverflow.com/questions/74785927/clangd-doesnt-recognize-standard-headers) for details.
 
-```
+**Logs:** All setup output is written to `~/.dotfiles-install.log`.

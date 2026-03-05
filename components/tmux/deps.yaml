@@ -1,0 +1,12 @@
+name: Terminal (tmux, hstr, powerline)
+order: 3
+requires:
+  - essentials
+link: .tmux.conf
+check: tmux -V && hstr --version
+apt:
+  - hstr
+  - tmux
+  - tmuxinator
+pip:
+  - powerline-status

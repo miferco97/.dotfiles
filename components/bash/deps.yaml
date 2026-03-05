@@ -1,0 +1,4 @@
+name: Bash config
+order: 4
+link: .bashrc.d
+check: test -d ~/.bashrc.d

@@ -1,0 +1,17 @@
+name: NeoVim + tools
+order: 2
+requires:
+  - essentials
+link: .config/nvim
+check: nvim --version
+apt:
+  - neovim
+  - xclip
+  - ripgrep
+  - python3-pynvim
+  - cppcheck
+pip:
+  - cpplint
+  - cmake-format
+ppa:
+  - ppa:neovim-ppa/unstable
