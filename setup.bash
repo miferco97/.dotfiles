@@ -108,6 +108,18 @@ bootstrap_deps() {
 
 bootstrap_deps
 
+# --- Multi-select helper ---
+# gum choose --no-limit returns empty when user presses enter without toggling.
+# This wrapper retries with --limit 1 (single-select) so enter picks the highlighted item.
+gum_choose_multi() {
+    local result
+    result=$(gum choose --no-limit "$@")
+    if [ -z "$result" ]; then
+        result=$(gum choose --limit 1 "$@")
+    fi
+    echo "$result"
+}
+
 # --- YAML parsing helpers ---
 parse_yaml_field() {
     local file="$1" field="$2"
@@ -337,7 +349,8 @@ run_install() {
     if [ ${#all_ppa[@]} -gt 0 ]; then
         log info "Adding PPAs..."
         for ppa in "${all_ppa[@]}"; do
-            gum spin --title "Adding $ppa" -- sudo add-apt-repository "$ppa" -y
+            log info "Adding $ppa..."
+            sudo add-apt-repository "$ppa" -y >> "$LOG_FILE" 2>&1
         done
     fi
 
@@ -347,7 +360,12 @@ run_install() {
         local unique_apt=($(printf '%s\n' "${all_apt[@]}" | sort -u))
         echo "  Packages: ${unique_apt[*]}"
         gum spin --title "apt-get update" -- sudo apt-get update
-        sudo apt-get install -y "${unique_apt[@]}"
+        if ! sudo apt-get install -y "${unique_apt[@]}"; then
+            log error "Some apt packages failed to install"
+            if ! gum confirm "Continue anyway?"; then
+                return 1
+            fi
+        fi
     fi
 
     # Batch pip install
@@ -355,7 +373,12 @@ run_install() {
         log info "Installing pip packages..."
         local unique_pip=($(printf '%s\n' "${all_pip[@]}" | sort -u))
         echo "  Packages: ${unique_pip[*]}"
-        pip install --user --break-system-packages "${unique_pip[@]}"
+        if ! pip install --user --break-system-packages "${unique_pip[@]}"; then
+            log error "Some pip packages failed to install"
+            if ! gum confirm "Continue anyway?"; then
+                return 1
+            fi
+        fi
     fi
 
     # Run post-install scripts
@@ -364,16 +387,21 @@ run_install() {
         local name="${COMP_NAMES[$i]}"
         if [ -f "$setup_script" ]; then
             log info "Running post-install for $name..."
-            if bash "$setup_script" >> "$LOG_FILE" 2>&1; then
+            echo "  $(gum style --foreground 212 "▶") Running post-install for $name..."
+            if bash "$setup_script" 2>&1 | tee -a "$LOG_FILE"; then
+                log info "Post-install for $name completed successfully"
+                echo "  $(gum style --foreground 46 "✓") $name post-install done"
                 succeeded+=("$name")
             else
-                log error "Post-install failed for $name"
+                log error "Post-install failed for $name (check ~/.dotfiles-install.log)"
+                echo "  $(gum style --foreground 196 "✗") $name post-install failed"
                 failed+=("$name")
                 if ! gum confirm "Continue with remaining components?"; then
                     break
                 fi
             fi
         else
+            echo "  $(gum style --foreground 242 "─") $name (no post-install script)"
             succeeded+=("$name")
         fi
     done
@@ -401,6 +429,8 @@ run_install() {
     done
     echo ""
     log info "Install finished in ${elapsed}s"
+    echo ""
+    gum confirm "Back to menu" --affirmative="OK" --negative="" || true
 }
 
 # --- Run uninstall for selected indices ---
@@ -454,6 +484,8 @@ run_uninstall() {
     done
     echo ""
     log info "Uninstall finished in ${elapsed}s"
+    echo ""
+    gum confirm "Back to menu" --affirmative="OK" --negative="" || true
 }
 
 # --- Run update (re-run setup + relink) for selected indices ---
@@ -461,22 +493,82 @@ run_update() {
     local indices=("$@")
     local start_time=$SECONDS
     local failed=() succeeded=()
+    local all_apt=() all_pip=() all_ppa=()
 
+    # Collect packages
+    for i in "${indices[@]}"; do
+        local deps_file="${COMP_DIRS[$i]}/deps.yaml"
+
+        while IFS= read -r ppa; do
+            [ -n "$ppa" ] && all_ppa+=("$ppa")
+        done < <(parse_yaml_list "$deps_file" "ppa")
+
+        while IFS= read -r pkg; do
+            [ -n "$pkg" ] && all_apt+=("$pkg")
+        done < <(parse_yaml_list "$deps_file" "apt")
+
+        while IFS= read -r pkg; do
+            [ -n "$pkg" ] && all_pip+=("$pkg")
+        done < <(parse_yaml_list "$deps_file" "pip")
+    done
+
+    # Add PPAs
+    if [ ${#all_ppa[@]} -gt 0 ]; then
+        log info "Adding PPAs..."
+        for ppa in "${all_ppa[@]}"; do
+            log info "Adding $ppa..."
+            sudo add-apt-repository "$ppa" -y >> "$LOG_FILE" 2>&1
+        done
+    fi
+
+    # Batch apt install
+    if [ ${#all_apt[@]} -gt 0 ]; then
+        log info "Updating apt packages..."
+        local unique_apt=($(printf '%s\n' "${all_apt[@]}" | sort -u))
+        echo "  Packages: ${unique_apt[*]}"
+        gum spin --title "apt-get update" -- sudo apt-get update
+        if ! sudo apt-get install -y "${unique_apt[@]}"; then
+            log error "Some apt packages failed to install"
+            if ! gum confirm "Continue anyway?"; then
+                return 1
+            fi
+        fi
+    fi
+
+    # Batch pip install
+    if [ ${#all_pip[@]} -gt 0 ]; then
+        log info "Updating pip packages..."
+        local unique_pip=($(printf '%s\n' "${all_pip[@]}" | sort -u))
+        echo "  Packages: ${unique_pip[*]}"
+        if ! pip install --user --break-system-packages "${unique_pip[@]}"; then
+            log error "Some pip packages failed to install"
+            if ! gum confirm "Continue anyway?"; then
+                return 1
+            fi
+        fi
+    fi
+
+    # Run post-install scripts
     for i in "${indices[@]}"; do
         local setup_script="${COMP_DIRS[$i]}/setup.bash"
         local name="${COMP_NAMES[$i]}"
         if [ -f "$setup_script" ]; then
             log info "Re-running setup for $name..."
-            if bash "$setup_script" >> "$LOG_FILE" 2>&1; then
+            echo "  $(gum style --foreground 212 "▶") Re-running setup for $name..."
+            if bash "$setup_script" 2>&1 | tee -a "$LOG_FILE"; then
+                log info "Setup for $name completed successfully"
+                echo "  $(gum style --foreground 46 "✓") $name setup done"
                 succeeded+=("$name")
             else
-                log error "Setup failed for $name"
+                log error "Setup failed for $name (check ~/.dotfiles-install.log)"
+                echo "  $(gum style --foreground 196 "✗") $name setup failed"
                 failed+=("$name")
                 if ! gum confirm "Continue with remaining components?"; then
                     break
                 fi
             fi
         else
+            echo "  $(gum style --foreground 242 "─") $name (no setup script)"
             succeeded+=("$name")
         fi
     done
@@ -504,6 +596,8 @@ run_update() {
     done
     echo ""
     log info "Update finished in ${elapsed}s"
+    echo ""
+    gum confirm "Back to menu" --affirmative="OK" --negative="" || true
 }
 
 # =====================================================================
@@ -592,7 +686,7 @@ mode_uninstall() {
     echo ""
 
     local chosen
-    chosen=$(gum choose --no-limit --selected="" "${options[@]}") || return
+    chosen=$(gum_choose_multi "${options[@]}") || return
     [ -z "$chosen" ] && { echo "No components selected."; return; }
 
     # Check if any still-installed component depends on a selected one
@@ -657,7 +751,7 @@ mode_reinstall() {
     echo ""
 
     local chosen
-    chosen=$(gum choose --no-limit --selected="" "${options[@]}") || return
+    chosen=$(gum_choose_multi "${options[@]}") || return
     [ -z "$chosen" ] && { echo "No components selected."; return; }
 
     # Resolve dependencies
@@ -710,7 +804,7 @@ mode_update() {
     echo ""
 
     local chosen
-    chosen=$(gum choose --no-limit --selected="" "${options[@]}") || return
+    chosen=$(gum_choose_multi "${options[@]}") || return
     [ -z "$chosen" ] && { echo "No components selected."; return; }
 
     echo ""

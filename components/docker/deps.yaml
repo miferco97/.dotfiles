@@ -3,9 +3,5 @@ order: 5
 requires:
   - essentials
 check: docker --version
-apt:
-  - docker-ce
-  - docker-ce-cli
-  - containerd.io
-  - docker-buildx-plugin
-  - docker-compose-plugin
+# apt packages are NOT listed here because they require Docker's official
+# repository, which is added by setup.bash before installing them.

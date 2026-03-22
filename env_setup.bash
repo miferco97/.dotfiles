@@ -8,7 +8,7 @@ REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
 COMPONENTS_DIR="$REPO_DIR/components"
 
 # Define install order
-ORDERED_COMPONENTS=(essentials python nvim tmux bash docker claude)
+ORDERED_COMPONENTS=(essentials nvim tmux bash docker claude)
 
 parse_yaml_list() {
     local file="$1" field="$2"
